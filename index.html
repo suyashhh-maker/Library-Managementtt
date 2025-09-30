@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Info & Library Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #34495e;
+      display: flex;
+      justify-content: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      display: block;
+    }
+    nav a:hover {
+      background: #1abc9c;
+    }
+    section {
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #2c3e50;
+      color: white;
+      margin-top: 20px;
+    }
+    /* Form Page */
+    .form-box {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+      width: 320px;
+      margin: 80px auto;
+    }
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    .form-box input, .form-box select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
+    }
+    .form-box button {
+      width: 100%;
+      padding: 10px;
+      background: #1abc9c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .form-box button:hover {
+      background: #16a085;
+    }
+    /* Hide library section initially */
+    #libraryPage { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Student Information Page -->
+  <div id="studentPage">
+    <div class="form-box">
+      <h2>Student Information</h2>
+      <form onsubmit="goToLibrary(event)">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="text" id="roll" placeholder="Roll Number" required>
+        <select id="branch" required>
+          <option value="">-- Select Branch --</option>
+          <option value="CSE">Computer Science</option>
+          <option value="ECE">Electronics</option>
+          <option value="ME">Mechanical</option>
+          <option value="CE">Civil</option>
+          <option value="EE">Electrical</option>
+        </select>
+        <button type="submit">Proceed to Library</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Library Management Page -->
+  <div id="libraryPage">
+    <header>
+      <h1>Library Management System</h1>
+      <p id="student-info"></p>
+    </header>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#books">Books</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="about">
+      <h2>About</h2>
+      <div class="card">
+        <p>
+          A Library Management System helps librarians and users efficiently manage 
+          books, records, and transactions. It digitizes the process of tracking 
+          available books, issued books, and returned ones.
+        </p>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2>Features</h2>
+      <div class="card">
+        <ul>
+          <li>Book cataloging and search</li>
+          <li>Issue and return management</li>
+          <li>User membership system</li>
+          <li>Fine calculation for late returns</li>
+          <li>Reports and statistics</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="books">
+      <h2>Available Books</h2>
+      <div class="card">
+        <table border="1" width="100%" cellspacing="0" cellpadding="8">
+          <tr>
+            <th>ID</th>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td>101</td>
+            <td>Introduction to C</td>
+            <td>E. Balagurusamy</td>
+            <td>Available</td>
+          </tr>
+          <tr>
+            <td>102</td>
+            <td>Digital Electronics</td>
+            <td>M. Mano</td>
+            <td>Issued</td>
+          </tr>
+          <tr>
+            <td>103</td>
+            <td>Mechanical Design</td>
+            <td>R.S. Khurmi</td>
+            <td>Available</td>
+          </tr>
+          <tr>
+            <td>104</td>
+            <td>Basic Electrical Engg</td>
+            <td>V.K. Mehta</td>
+            <td>Available</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Email: library@management.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Address: Central Library, Knowledge City</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Library Management System | All Rights Reserved</p>
+    </footer>
+  </div>
+
+  <script>
+    function goToLibrary(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const roll = document.getElementById("roll").value;
+      const branch = document.getElementById("branch").value;
+
+      document.getElementById("student-info").textContent =
+        `Welcome, ${name} | Roll No: ${roll} | Branch: ${branch}`;
+
+      // Hide student form and show library
+      document.getElementById("studentPage").style.display = "none";
+      document.getElementById("libraryPage").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
